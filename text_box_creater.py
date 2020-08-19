@@ -10,9 +10,7 @@ class TextBoxCreater(object):
 		self.master = master
 
 		with open(file_name, 'br') as f:
-			lines = parser(f.read())
-			if mode:
-				lines = self._preprocess(lines, mode)
+			lines = self._preprocess(parser(f.read()), mode)
 
 		self.text_box = tkinter.Text(
 				master = master,
@@ -47,6 +45,12 @@ class TextBoxCreater(object):
 					res.append(lines[idx])
 
 			return res
+		elif not mode:
+			res = []
+			for idx, line in enumerate(lines):
+				res.append('{}.{}'.format(idx+1, line))
+
+			return res
 
 	def assign_button(self, nums):
 		self.frame_creater4_list = []
@@ -54,7 +58,7 @@ class TextBoxCreater(object):
 		for idx in range(nums):
 			frame_creater4 = FrameCreater(master=self.master, width=22, height=1, side=tkinter.TOP)
 			self.frame_creater4_list.append(frame_creater4)
-			self.button_done_list.append(ButtonDone(id=idx, master=frame_creater4.frame, text_box_creater=self))
-			self.button_cancel_list.append(ButtonCancel(id=idx, master=frame_creater4.frame, text_box_creater=self))
+			self.button_done_list.append(ButtonDone(id=idx, master=frame_creater4.frame, text='{}.done'.format(idx+1), text_box_creater=self))
+			self.button_cancel_list.append(ButtonCancel(id=idx, master=frame_creater4.frame, text='{}.cancel'.format(idx+1), text_box_creater=self))
 
 		self.button_add = ButtonAdd(master=self.master, text_box_creater=self)

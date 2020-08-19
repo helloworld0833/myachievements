@@ -6,4 +6,5 @@ think about the investment policy 7/28/2020
 open stock us's account 8/10/2020
 initial deposit into my stock account 8/10/2020
 去掉简历中的水分 8/19/2020
-添加中文模式 8/19/2020
+添加中文的模式 8/19/2020
+添加数字的编号模式 8/19/2020

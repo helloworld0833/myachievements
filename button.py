@@ -15,11 +15,11 @@ class Button(object):
 		self.button.pack(side=side, expand=True)
 
 class ButtonDone(Button):
-	def __init__(self, id, master, text_box_creater):
+	def __init__(self, id, master, text, text_box_creater):
 		self.id = id
 		self.text_box_creater = text_box_creater
 
-		super(ButtonDone, self).__init__(master=master, text='done', width=10, height=1)
+		super(ButtonDone, self).__init__(master=master, text=text, width=10, height=1)
 
 		self.button.bind('<Button-1>', self._done)
 
@@ -28,6 +28,8 @@ class ButtonDone(Button):
 		text_list = text.split('\n')
 		while text_list and not text_list[-1]:
 			text_list.pop()
+
+		text_list = self._remove_id(text_list)
 
 		item_done = text_list[self.id]
 		text_list.pop(self.id)
@@ -56,17 +58,24 @@ class ButtonDone(Button):
 		now = datetime.datetime.now()
 
 		with open('1.txt', 'a') as f:
-			f.write('{} {}/{}/{}\n'.format(''.join(deparser([item_done])), now.month, now.day, now.year))
+			f.write('{} {}/{}/{}\n'.format(''.join([deparser(item_done)]), now.month, now.day, now.year))
 
 		with open('backup.txt', 'a') as f:
-			f.write('{} {}/{}/{}\n'.format(''.join(deparser([item_done])), now.month, now.day, now.year))
+			f.write('{} {}/{}/{}\n'.format(''.join([deparser(item_done)]), now.month, now.day, now.year))
+
+	def _remove_id(self, text_list):
+		new_text_list = []
+		for text in text_list:
+			new_text_list.append('.'.join(text.split('.')[1:]))
+
+		return new_text_list
 
 class ButtonCancel(Button):
-	def __init__(self, id, master, text_box_creater):
+	def __init__(self, id, master, text, text_box_creater):
 		self.id = id
 		self.text_box_creater = text_box_creater
 
-		super(ButtonCancel, self).__init__(master=master, text='cancel', width=10, height=1)
+		super(ButtonCancel, self).__init__(master=master, text=text, width=10, height=1)
 
 		self.button.bind('<Button-1>', self._cancel)
 
@@ -125,10 +134,10 @@ class ButtonAdd(Button):
 		self.text_box_creater.frame_creater4_list.append(frame_creater4)
 
 		idx = len(self.text_box_creater.button_done_list)
-		self.text_box_creater.button_done_list.append(ButtonDone(id=idx, master=frame_creater4.frame, text_box_creater=self.text_box_creater))
-		self.text_box_creater.button_cancel_list.append(ButtonCancel(id=idx, master=frame_creater4.frame, text_box_creater=self.text_box_creater))
+		self.text_box_creater.button_done_list.append(ButtonDone(id=idx, master=frame_creater4.frame, text='{}.done'.format(idx+1), text_box_creater=self.text_box_creater))
+		self.text_box_creater.button_cancel_list.append(ButtonCancel(id=idx, master=frame_creater4.frame, text='{}.cancel'.format(idx+1), text_box_creater=self.text_box_creater))
 
 		self.text_box_creater.button_add = ButtonAdd(master=self.text_box_creater.master, text_box_creater=self.text_box_creater)
 
 		with open('dashboard.txt', 'a') as f:
-			f.write('{}\n'.format(deparser(item_add)))
+			f.write('{}\n'.format(''.join(deparser([item_add]))))
