@@ -3,7 +3,7 @@ import random
 
 from frame_creater import FrameCreater
 from button import ButtonDone, ButtonCancel, ButtonAdd
-from utilities import parser
+from utilities import parser, deparser
 
 class TextBoxCreater(object):
 	def __init__(self, master, file_name, state='disabled', mode=None, assign_button=False):

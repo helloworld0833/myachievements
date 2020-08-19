@@ -10,3 +10,10 @@ def parser(file_input):
 			lines.append(line.strip()+'\n')
 
 	return lines
+
+def deparser(file_output):
+	new_lines = []
+	for line in file_output:
+		new_lines.append(line.encode('utf-8').decode('utf-8'))
+
+	return new_lines

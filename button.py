@@ -2,7 +2,7 @@ import tkinter
 import datetime
 
 from frame_creater import FrameCreater
-from utilities import parser
+from utilities import parser, deparser
 
 class Button(object):
 	def __init__(self, master, text, width, height=1, side=tkinter.LEFT):
@@ -48,18 +48,18 @@ class ButtonDone(Button):
 		with open('dashboard.txt', 'br') as f:
 			with open('dashboard2.txt', 'w') as f2:
 				lines = parser(f.read())
-				f2.write(''.join(lines))
+				f2.write(''.join(deparser(lines)))
 
 		with open('dashboard.txt', 'w') as f:
-			f.write('\n'.join(text_list))
+			f.write('\n'.join(deparser(text_list))+'\n')
 
 		now = datetime.datetime.now()
 
 		with open('1.txt', 'a') as f:
-			f.write('{} {}/{}/{}\n'.format(item_done, now.month, now.day, now.year))
+			f.write('{} {}/{}/{}\n'.format(''.join(deparser([item_done])), now.month, now.day, now.year))
 
 		with open('backup.txt', 'a') as f:
-			f.write('{} {}/{}/{}\n'.format(item_done, now.month, now.day, now.year))
+			f.write('{} {}/{}/{}\n'.format(''.join(deparser([item_done])), now.month, now.day, now.year))
 
 class ButtonCancel(Button):
 	def __init__(self, id, master, text_box_creater):
@@ -95,10 +95,10 @@ class ButtonCancel(Button):
 		with open('dashboard.txt', 'br') as f:
 			with open('dashboard2.txt', 'w') as f2:
 				lines = parser(f.read())
-				f2.write(''.join(lines))
+				f2.write(''.join(deparser(lines)))
 
 		with open('dashboard.txt', 'w') as f:
-			f.write('\n'.join(text_list))
+			f.write('\n'.join(deparser(text_list)))
 			f.write('\n')
 
 class ButtonAdd(Button):
@@ -131,4 +131,4 @@ class ButtonAdd(Button):
 		self.text_box_creater.button_add = ButtonAdd(master=self.text_box_creater.master, text_box_creater=self.text_box_creater)
 
 		with open('dashboard.txt', 'a') as f:
-			f.write('{}\n'.format(item_add))
+			f.write('{}\n'.format(deparser(item_add)))
