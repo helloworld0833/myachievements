@@ -17,3 +17,10 @@ def deparser(file_output):
 		new_lines.append(line.encode('utf-8').decode('utf-8'))
 
 	return new_lines
+
+def remove_id(text_list):
+	new_text_list = []
+	for text in text_list:
+		new_text_list.append('.'.join(text.split('.')[1:]))
+
+	return new_text_list

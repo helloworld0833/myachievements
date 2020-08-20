@@ -2,7 +2,7 @@ import tkinter
 import datetime
 
 from frame_creater import FrameCreater
-from utilities import parser, deparser
+from utilities import parser, deparser, remove_id
 
 class Button(object):
 	def __init__(self, master, text, width, height=1, side=tkinter.LEFT):
@@ -29,7 +29,7 @@ class ButtonDone(Button):
 		while text_list and not text_list[-1]:
 			text_list.pop()
 
-		text_list = self._remove_id(text_list)
+		text_list = remove_id(text_list)
 
 		item_done = text_list[self.id]
 		text_list.pop(self.id)
@@ -63,13 +63,6 @@ class ButtonDone(Button):
 		with open('backup.txt', 'a') as f:
 			f.write('{} {}/{}/{}\n'.format(''.join([deparser(item_done)]), now.month, now.day, now.year))
 
-	def _remove_id(self, text_list):
-		new_text_list = []
-		for text in text_list:
-			new_text_list.append('.'.join(text.split('.')[1:]))
-
-		return new_text_list
-
 class ButtonCancel(Button):
 	def __init__(self, id, master, text, text_box_creater):
 		self.id = id
@@ -84,6 +77,8 @@ class ButtonCancel(Button):
 		text_list = text.split('\n')
 		while text_list and not text_list[-1]:
 			text_list.pop()
+
+		text_list = remove_id(text_list)
 
 		item_cancel = text_list[self.id]
 		text_list.pop(self.id)
