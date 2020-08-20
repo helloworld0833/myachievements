@@ -30,7 +30,7 @@ class TextBoxCreater(object):
 
 	def _preprocess(self, lines, mode):
 		if mode == 'recent':
-			return lines[-10:]
+			return ['achievements points {}\n\n'.format(len(lines)*10)]+lines[-10:]
 		elif mode == 'random':
 			if len(lines) <= 10:
 				return lines

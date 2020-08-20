@@ -58,10 +58,10 @@ class ButtonDone(Button):
 		now = datetime.datetime.now()
 
 		with open('1.txt', 'a') as f:
-			f.write('{} {}/{}/{}\n'.format(''.join([deparser(item_done)]), now.month, now.day, now.year))
+			f.write('{} {}/{}/{}\n'.format(''.join(deparser(item_done)), now.month, now.day, now.year))
 
 		with open('backup.txt', 'a') as f:
-			f.write('{} {}/{}/{}\n'.format(''.join([deparser(item_done)]), now.month, now.day, now.year))
+			f.write('{} {}/{}/{}\n'.format(''.join(deparser(item_done)), now.month, now.day, now.year))
 
 class ButtonCancel(Button):
 	def __init__(self, id, master, text, text_box_creater):

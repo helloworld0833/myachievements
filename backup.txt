@@ -8,3 +8,4 @@ initial deposit into my stock account 8/10/2020
 去掉简历中的水分 8/19/2020
 添加中文的模式 8/19/2020
 添加数字的编号模式 8/19/2020
+添加achievements 8/20/2020
