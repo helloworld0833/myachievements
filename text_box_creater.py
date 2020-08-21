@@ -39,7 +39,7 @@ class TextBoxCreater(object):
 
 			res, my_set = [], set()
 			while len(res) < 10:
-				idx = random.randrange(0, len(lines)-1)
+				idx = random.randrange(0, len(lines))
 				if idx not in my_set:
 					my_set.add(idx)
 					res.append(lines[idx])
