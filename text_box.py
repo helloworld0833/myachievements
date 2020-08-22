@@ -32,7 +32,7 @@ class TextBox(object):
 
 	def _preprocess(self, lines):
 		if self.mode == 'recent':
-			return ['achievements points {}\n\n'.format(len(lines)*10)]+lines[-10:]
+			return ['achievement points {}\n\n'.format(len(lines)*10)]+lines[-10:]
 		elif self.mode == 'random':
 			if len(lines) <= 10:
 				return lines
