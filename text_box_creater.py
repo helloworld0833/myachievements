@@ -1,7 +1,7 @@
 import tkinter
 import random
 
-from frame_creater import FrameCreater
+from frame import Frame
 from button import ButtonDone, ButtonCancel, ButtonAdd
 from utilities import parser, deparser
 
@@ -53,12 +53,12 @@ class TextBoxCreater(object):
 			return res
 
 	def assign_button(self, nums):
-		self.frame_creater4_list = []
+		self.button_frame_list = []
 		self.button_done_list, self.button_cancel_list = [], []
 		for idx in range(nums):
-			frame_creater4 = FrameCreater(master=self.master, width=22, height=1, side=tkinter.TOP)
-			self.frame_creater4_list.append(frame_creater4)
-			self.button_done_list.append(ButtonDone(id=idx, master=frame_creater4.frame, text='{}.done'.format(idx+1), text_box_creater=self))
-			self.button_cancel_list.append(ButtonCancel(id=idx, master=frame_creater4.frame, text='{}.cancel'.format(idx+1), text_box_creater=self))
+			button_frame = Frame(master=self.master, width=22, height=1, side=tkinter.TOP)
+			self.button_frame_list.append(button_frame)
+			self.button_done_list.append(ButtonDone(id=idx, master=button_frame.frame, text='{}.done'.format(idx+1), text_box_creater=self))
+			self.button_cancel_list.append(ButtonCancel(id=idx, master=button_frame.frame, text='{}.cancel'.format(idx+1), text_box_creater=self))
 
 		self.button_add = ButtonAdd(master=self.master, text_box_creater=self)

@@ -1,7 +1,7 @@
 import tkinter
 import datetime
 
-from frame_creater import FrameCreater
+from frame import Frame
 from utilities import parser, deparser, remove_id
 
 class Button(object):
@@ -36,10 +36,10 @@ class ButtonDone(Button):
 
 		self.text_box_creater.text_box.delete('{}.0'.format(self.id+1), '{}.end + 1 char'.format(self.id+1))
 
-		frame_creater4 = self.text_box_creater.frame_creater4_list[self.id]
-		frame_creater4.frame.pack_forget()
+		button_frame = self.text_box_creater.button_frame_list[self.id]
+		button_frame.frame.pack_forget()
 
-		self.text_box_creater.frame_creater4_list.pop(self.id)
+		self.text_box_creater.button_frame_list.pop(self.id)
 		self.text_box_creater.button_done_list.pop(self.id)
 		self.text_box_creater.button_cancel_list.pop(self.id)
 
@@ -85,10 +85,10 @@ class ButtonCancel(Button):
 
 		self.text_box_creater.text_box.delete('{}.0'.format(self.id+1), '{}.end + 1 char'.format(self.id+1))
 
-		frame_creater4 = self.text_box_creater.frame_creater4_list[self.id]
-		frame_creater4.frame.pack_forget()
+		button_frame = self.text_box_creater.button_frame_list[self.id]
+		button_frame.frame.pack_forget()
 
-		self.text_box_creater.frame_creater4_list.pop(self.id)
+		self.text_box_creater.button_frame_list.pop(self.id)
 		self.text_box_creater.button_done_list.pop(self.id)
 		self.text_box_creater.button_cancel_list.pop(self.id)
 
@@ -125,12 +125,12 @@ class ButtonAdd(Button):
 
 		self.text_box_creater.button_add.button.pack_forget()
 
-		frame_creater4 = FrameCreater(master=self.text_box_creater.master, width=22, height=1, side=tkinter.TOP)
-		self.text_box_creater.frame_creater4_list.append(frame_creater4)
+		button_frame = Frame(master=self.text_box_creater.master, width=22, height=1, side=tkinter.TOP)
+		self.text_box_creater.button_frame_list.append(button_frame)
 
 		idx = len(self.text_box_creater.button_done_list)
-		self.text_box_creater.button_done_list.append(ButtonDone(id=idx, master=frame_creater4.frame, text='{}.done'.format(idx+1), text_box_creater=self.text_box_creater))
-		self.text_box_creater.button_cancel_list.append(ButtonCancel(id=idx, master=frame_creater4.frame, text='{}.cancel'.format(idx+1), text_box_creater=self.text_box_creater))
+		self.text_box_creater.button_done_list.append(ButtonDone(id=idx, master=button_frame.frame, text='{}.done'.format(idx+1), text_box_creater=self.text_box_creater))
+		self.text_box_creater.button_cancel_list.append(ButtonCancel(id=idx, master=button_frame.frame, text='{}.cancel'.format(idx+1), text_box_creater=self.text_box_creater))
 
 		self.text_box_creater.button_add = ButtonAdd(master=self.text_box_creater.master, text_box_creater=self.text_box_creater)
 
