@@ -32,15 +32,15 @@ class TextBox(object):
 
 	def _preprocess(self, lines):
 		if self.mode == 'recent':
-			return ['achievement points {}\n\n'.format(len(lines)*10)]+lines[-10:]
+			return ['achievement points {}\n\n'.format(len(lines)*10)]+lines[-20:]
 		elif self.mode == 'random':
-			if len(lines) <= 10:
+			if len(lines) <= 20:
 				return lines
 
 			random.seed()
 
 			res, my_set = [], set()
-			while len(res) < 10:
+			while len(res) < 20:
 				idx = random.randrange(0, len(lines))
 				if idx not in my_set:
 					my_set.add(idx)
