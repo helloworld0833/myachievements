@@ -55,12 +55,13 @@ class ButtonDone(Button):
 			self.text_box.button_done_list[idx].id -= 1
 			self.text_box.button_cancel_list[idx].id -= 1
 
-		with open('dashboard.txt', 'br') as f:
-			with open('dashboard_backup.txt', 'w') as f2:
+		with open('dashboard.txt', 'ab+') as f:
+			f.seek(0)
+			with open('dashboard_backup.txt', 'w+') as f2:
 				lines = parser(f.read())
 				f2.write(''.join(deparser(lines)))
 
-		with open('dashboard.txt', 'w') as f:
+		with open('dashboard.txt', 'w+') as f:
 			f.write('\n'.join(deparser(text_list))+'\n')
 
 		now = datetime.datetime.now()
@@ -106,12 +107,13 @@ class ButtonCancel(Button):
 			self.text_box.button_done_list[idx].id -= 1
 			self.text_box.button_cancel_list[idx].id -= 1
 
-		with open('dashboard.txt', 'br') as f:
-			with open('dashboard_backup.txt', 'w') as f2:
+		with open('dashboard.txt', 'ab+') as f:
+			f.seek(0)
+			with open('dashboard_backup.txt', 'w+') as f2:
 				lines = parser(f.read())
 				f2.write(''.join(deparser(lines)))
 
-		with open('dashboard.txt', 'w') as f:
+		with open('dashboard.txt', 'w+') as f:
 			f.write('\n'.join(deparser(text_list)))
 			f.write('\n')
 

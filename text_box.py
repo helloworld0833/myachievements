@@ -11,7 +11,8 @@ class TextBox(object):
 		self.window = window
 		self.mode = mode
 
-		with open(file_name, 'br') as f:
+		with open(file_name, 'ab+') as f:
+			f.seek(0)
 			lines = self._preprocess(parser(f.read()))
 
 		self.text_box = tkinter.Text(
